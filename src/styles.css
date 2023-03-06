@@ -1,1 +1,24 @@
 /* You can add global styles to this file, and also import other style files */
+
+body{
+    background-image: url("./assets/bank5.jpg");
+    background-size: cover;
+    margin: 0;
+}
+
+header{
+    height: 50px;
+    background-color: rgb(13, 13, 54);
+}
+footer{
+
+    height: 70px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: rgb(13, 13, 54);
+}
+
+h3{
+    color: whitesmoke;
+}
