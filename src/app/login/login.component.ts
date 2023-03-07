@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -22,26 +23,30 @@ export class LoginComponent {
     1002:{username:"Sasha",acno:1002,password:"ab14",balance:0},
     1003:{username:"Luke",acno:1003,password:"ab15",balance:0}
   }
+  constructor(private router:Router){}
 
 
   //let us make a method
-  // login(){
-  //   var acnumb = this.acnum                 //To just avoid calling "this.acnum" everytime,we r storing it inside another variable called "acnumb"
-  //   var userDetails = this.userDetails
-  //   var psw = this.pass
-  //   if (acnumb in userDetails) {
-  //     if(psw==userDetails[acnumb]["password"]){
-  //       alert('Login success')
+  login(){
+    var acnumb = this.acnum                 //To just avoid calling "this.acnum" everytime,we r storing it inside another variable called "acnumb"
+    var userDetails = this.userDetails
+    var psw = this.pass
+    if (acnumb in userDetails) {
+      if(psw==userDetails[acnumb]["password"]){
+        alert('Login success')
+        //redirection
+        this.router.navigateByUrl("dashboard")
+        
 
-  //     }
-  //     else{
-  //       alert('Incorrect password')
-  //     }
-  //   }
-  //   else{
-  //     alert('Incorrect acnum')
-  //   }
-  // }
+      }
+      else{
+        alert('Incorrect password')
+      }
+    }
+    else{
+      alert('Incorrect acnum')
+    }
+  }
 
   // $event binding
 
@@ -59,22 +64,22 @@ export class LoginComponent {
   // we r now doing event binding with template rendering.For that purpose we r commenting the above $binding.
 
 
-  login(acnumb:any,psw:any){
-    var acnumb = acnumb.value                 //To just avoid calling "this.acnum" everytime,we r storing it inside another variable called "acnumb"
-    var userDetails = this.userDetails
-    var psw = psw.value                           //In template rendering,to console we have to give ".value"
-    if (acnumb in userDetails) {
-      if(psw==userDetails[acnumb]["password"]){
-        alert('Login success')
+  // login(acnumb:any,psw:any){
+  //   var acnumb = acnumb.value                 //To just avoid calling "this.acnum" everytime,we r storing it inside another variable called "acnumb"
+  //   var userDetails = this.userDetails
+  //   var psw = psw.value                           //In template rendering,to console we have to give ".value"
+  //   if (acnumb in userDetails) {
+  //     if(psw==userDetails[acnumb]["password"]){
+  //       alert('Login success')
 
-      }
-      else{
-        alert('Incorrect password')
-      }
-    }
-    else{
-      alert('Incorrect acnum')
-    }
-  }
+  //     }
+  //     else{
+  //       alert('Incorrect password')
+  //     }
+  //   }
+  //   else{
+  //     alert('Incorrect acnum')
+  //   }
+  // }
 
 }
