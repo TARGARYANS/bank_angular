@@ -25,10 +25,44 @@ export class LoginComponent {
 
 
   //let us make a method
-  login(){
-    var acnumb = this.acnum                 //To just avoid calling "this.acnum" everytime,we r storing it inside another variable called "acnumb"
+  // login(){
+  //   var acnumb = this.acnum                 //To just avoid calling "this.acnum" everytime,we r storing it inside another variable called "acnumb"
+  //   var userDetails = this.userDetails
+  //   var psw = this.pass
+  //   if (acnumb in userDetails) {
+  //     if(psw==userDetails[acnumb]["password"]){
+  //       alert('Login success')
+
+  //     }
+  //     else{
+  //       alert('Incorrect password')
+  //     }
+  //   }
+  //   else{
+  //     alert('Incorrect acnum')
+  //   }
+  // }
+
+  // $event binding
+
+  // acnoChange(event:any){            //nammal ivide type "any" aayitu define cheythu
+  //   this.acnum=event.target.value
+  //   //declare cheytha variablene pinneed call cheyumbol "this."  use cheyanam
+  //   }
+
+  // passChange(event:any){
+  //   this.pass=event.target.value
+  //   console.log(this.pass);
+    
+  // }  
+
+  // we r now doing event binding with template rendering.For that purpose we r commenting the above $binding.
+
+
+  login(acnumb:any,psw:any){
+    var acnumb = acnumb.value                 //To just avoid calling "this.acnum" everytime,we r storing it inside another variable called "acnumb"
     var userDetails = this.userDetails
-    var psw = this.pass
+    var psw = psw.value                           //In template rendering,to console we have to give ".value"
     if (acnumb in userDetails) {
       if(psw==userDetails[acnumb]["password"]){
         alert('Login success')
@@ -42,18 +76,5 @@ export class LoginComponent {
       alert('Incorrect acnum')
     }
   }
-
-  // $event binding
-
-  acnoChange(event:any){            //nammal ivide type "any" aayitu define cheythu
-    this.acnum=event.target.value
-    //declare cheytha variablene pinneed call cheyumbol "this."  use cheyanam
-    }
-
-  passChange(event:any){
-    this.pass=event.target.value
-    console.log(this.pass);
-    
-  }  
 
 }
