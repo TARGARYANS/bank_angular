@@ -2,3 +2,10 @@ Data binding in angular
    _______________
 
    
+
+   Angular Service
+   ---------------
+
+   It is a file in angular,where all components can access the content inside it.
+
+   command to create angular service :  ng g s filename

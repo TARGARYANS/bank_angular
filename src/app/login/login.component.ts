@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { DataService } from '../services/data.service';
 
 @Component({
   selector: 'app-login',
@@ -17,19 +18,19 @@ export class LoginComponent {
   acnum:any
   pass:any
 
-  userDetails:any ={                                                    //This  is a database
-    1000:{username:"Thomas",acno:1000,password:"ab12",balance:0},
-    1001:{username:"Dante",acno:1001,password:"ab13",balance:0},
-    1002:{username:"Sasha",acno:1002,password:"ab14",balance:0},
-    1003:{username:"Luke",acno:1003,password:"ab15",balance:0}
-  }
-  constructor(private router:Router){}
+  // userDetails:any ={                                                    //This  is a database
+  //   1000:{username:"Thomas",acno:1000,password:"ab12",balance:0},
+  //   1001:{username:"Dante",acno:1001,password:"ab13",balance:0},
+  //   1002:{username:"Sasha",acno:1002,password:"ab14",balance:0},
+  //   1003:{username:"Luke",acno:1003,password:"ab15",balance:0}
+  // }
+  constructor(private router:Router,private ds:DataService){}
 
 
   //let us make a method
   login(){
     var acnumb = this.acnum                 //To just avoid calling "this.acnum" everytime,we r storing it inside another variable called "acnumb"
-    var userDetails = this.userDetails
+    var userDetails = this.ds.userDetails
     var psw = this.pass
     if (acnumb in userDetails) {
       if(psw==userDetails[acnumb]["password"]){
