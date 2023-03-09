@@ -5,6 +5,8 @@ import { Injectable } from '@angular/core';
 })
 export class DataService {
 
+  currentuser:any
+
 
   userDetails:any ={                                                    //Just paste the required data into the service
     1000:{username:"Thomas",acno:1000,password:"ab12",balance:0},
@@ -25,6 +27,24 @@ export class DataService {
       console.log(userDetails);
       
       return true
+    }
+  }
+
+
+  login(acno:any,psw:any){
+    var userDetails = this.userDetails
+    if (acno in userDetails) {
+      if (psw == userDetails[acno]["password"]) {
+        //store current user
+        this.currentuser = userDetails[acno]["username"]
+        return true
+      }
+      else{
+        return false
+      }
+    }
+    else{
+      return false
     }
   }
 

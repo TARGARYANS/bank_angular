@@ -15,8 +15,8 @@ export class LoginComponent {
 
   //variable declaration can be done by either
   // acno=""   or  acno:any
-  acnum:any
-  pass:any
+  acno:any
+  psw:any
 
   // userDetails:any ={                                                    //This  is a database
   //   1000:{username:"Thomas",acno:1000,password:"ab12",balance:0},
@@ -28,26 +28,26 @@ export class LoginComponent {
 
 
   //let us make a method
-  login(){
-    var acnumb = this.acnum                 //To just avoid calling "this.acnum" everytime,we r storing it inside another variable called "acnumb"
-    var userDetails = this.ds.userDetails
-    var psw = this.pass
-    if (acnumb in userDetails) {
-      if(psw==userDetails[acnumb]["password"]){
-        alert('Login success')
-        //redirection
-        this.router.navigateByUrl("dashboard")
+  // login(){
+  //   var acnumb = this.acnum                 //To just avoid calling "this.acnum" everytime,we r storing it inside another variable called "acnumb"
+  //   var userDetails = this.ds.userDetails
+  //   var psw = this.pass
+  //   if (acnumb in userDetails) {
+  //     if(psw==userDetails[acnumb]["password"]){
+  //       alert('Login success')
+  //       //redirection
+  //       this.router.navigateByUrl("dashboard")
         
 
-      }
-      else{
-        alert('Incorrect password')
-      }
-    }
-    else{
-      alert('Incorrect acnum')
-    }
-  }
+  //     }
+  //     else{
+  //       alert('Incorrect password')
+  //     }
+  //   }
+  //   else{
+  //     alert('Incorrect acnum')
+  //   }
+  // }
 
   // $event binding
 
@@ -82,5 +82,27 @@ export class LoginComponent {
   //     alert('Incorrect acnum')
   //   }
   // }
+
+
+
+  //we created login method in data services.Now we can call it here
+
+  login(){
+    var acno = this.acno
+    var psw = this.psw
+    const result=this.ds.login(acno,psw)
+    if (result){
+      alert("login success")
+      this.router.navigateByUrl("dashboard")
+    }
+    else{
+      alert("Incorrect acno or password")
+    }
+  }
+
+
+
+
+
 
 }

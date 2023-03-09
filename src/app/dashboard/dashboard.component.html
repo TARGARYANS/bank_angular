@@ -1,1 +1,40 @@
-<p>dashboard works!</p>
+<h1 class=" p-2 ms-2" style="color: rgb(246, 220, 53);text-align: center;">WELCOME {{user}}</h1>
+<div class="row">
+    <div class="col-6 p-3">
+
+        <h2 class="mt-3" style="color: palevioletred;font-weight: bold;text-align: center;">DEPOSIT FORM</h2>
+        <form class="mt-4 p-3 w-50 container text-center"
+            style="background-color: rgba(124, 64, 202, 0.44);border-radius: 20px;" action="">
+            <div class="p-2 mt-2">
+                <input id="c1" name="acn" class="form-control mt-2 p-2" type="text" placeholder="account number">
+            </div>
+            <div class="p-2 mt-2">
+                <input id="c2" name="pps" class="form-control mt-2 p-2" type="password" placeholder="Enter Password">
+            </div>
+            <div class="p-2 mt-2">
+                <input id="c3" name="amt" class="form-control mt-2 p-2" type="password" placeholder="Enter Amount">
+            </div>
+            <button class="btn btn-warning mt-4 p-2">DEPOSIT</button>
+
+        </form>
+
+    </div>
+    <div class="col-6 p-3">
+        <h2 class="mt-3" style="color: rgb(239, 14, 21);font-weight: bold;text-align: center;">WITHDRAW FORM</h2>
+        <form class="mt-4 p-3 w-50 container text-center"
+            style="background-color: rgba(124, 64, 202, 0.44);border-radius: 20px;" action="">
+            <div class="p-2 mt-2">
+                <input id="d1" name="acnb" class="form-control mt-2 p-2" type="text" placeholder="account number">
+            </div>
+            <div class="p-2 mt-2">
+                <input id="d2" name="pwd" class="form-control mt-2 p-2" type="password" placeholder="Enter Password">
+            </div>
+            <div class="p-2 mt-2">
+                <input id="d3" name="amnt" class="form-control mt-2 p-2" type="password" placeholder="Enter Amount">
+            </div>
+            <button class="btn btn-info mt-4 p-2">WITHDRAW</button>
+
+        </form>
+
+    </div>
+</div>

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { DataService } from '../services/data.service';
 
 @Component({
@@ -12,7 +13,7 @@ export class RegisterComponent {
   psww:any
   uname:any
 
-  constructor(private ds:DataService){}
+  constructor(private ds:DataService,private router:Router){}
 
   //injection is succesful.Now we r going to call the "register method" in the dataservice.ts to here
 
@@ -24,6 +25,7 @@ export class RegisterComponent {
     const result = this.ds.register(acnno,uname,psww)
     if (result) {
       alert("registered")
+      this.router.navigateByUrl("")
     }
     else{
       alert("user already present")
