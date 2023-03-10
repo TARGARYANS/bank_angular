@@ -30,6 +30,7 @@ export class DataService {
     }
   }
 
+  //WE ARE CREATING A METHOD FOR LOGIN
 
   login(acno:any,psw:any){
     var userDetails = this.userDetails
@@ -42,6 +43,55 @@ export class DataService {
       else{
         return false
       }
+    }
+    else{
+      return false
+    }
+  }
+
+
+  //WE ARE CREATING A METHOD FOR DEPOSIT
+
+  deposit(acno:any,psw:any,ant:any){
+    var amount = parseInt(ant)        //Here we r converting the "string datatype" ant to an integer and store it into another variable.
+    var userDetails = this.userDetails
+
+    if (acno in userDetails) {
+      if (psw==userDetails[acno]["password"]) {
+        userDetails[acno]["balance"]+=amount           //HERE Amount wil be added to the balance
+        return userDetails[acno]["balance"]
+      }
+      else{
+        return false
+      }
+      
+    }
+    else{
+      return false
+    }
+  }
+
+  //WE ARE CREATING A LOGIC FOR WITHDRAWAL
+
+  withdraw(acnu:any,psd:any,ammt:any){
+    var amount1 = parseInt(ammt)
+    var userDetails = this.userDetails
+
+    if (acnu in userDetails) {
+      if (psd==userDetails[acnu]["password"]) {
+        if (amount1<=userDetails[acnu]["balance"]) {
+          userDetails[acnu]["balance"]-=amount1
+
+          return userDetails[acnu]["balance"]
+        }
+        else{
+          alert("Insufficient balance")
+        }
+      }
+      else{
+        return false
+      }
+      
     }
     else{
       return false
