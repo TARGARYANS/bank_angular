@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DataService } from '../services/data.service';
 
@@ -13,7 +14,15 @@ export class RegisterComponent {
   psww:any
   uname:any
 
-  constructor(private ds:DataService,private router:Router){}
+  constructor(private ds:DataService,private router:Router,private fb:FormBuilder){}
+
+  //model for register form
+
+  registerForm = this.fb.group({
+    acnno:[''],
+    psww:[''],
+    uname:['']
+  })
 
   //injection is succesful.Now we r going to call the "register method" in the dataservice.ts to here
 

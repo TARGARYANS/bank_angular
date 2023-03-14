@@ -12,7 +12,7 @@
                 <input [(ngModel)]="psw" id="c2" name="pps" class="form-control mt-2 p-2" type="password" placeholder="Enter Password">
             </div>
             <div class="p-2 mt-2">
-                <input [(ngModel)]="ant" id="c3" name="amt" class="form-control mt-2 p-2" type="password" placeholder="Enter Amount">
+                <input [(ngModel)]="ant" id="c3" name="amt" class="form-control mt-2 p-2" type="text" placeholder="Enter Amount">
             </div>
             <button (click)="deposit()" class="btn btn-warning mt-4 p-2" style="font-weight: bold;">DEPOSIT</button>
 
@@ -30,7 +30,7 @@
                 <input [(ngModel)]="psd" id="d2" name="pwd" class="form-control mt-2 p-2" type="password" placeholder="Enter Password">
             </div>
             <div class="p-2 mt-2">
-                <input [(ngModel)]="ammt" id="d3" name="amnt" class="form-control mt-2 p-2" type="password" placeholder="Enter Amount">
+                <input [(ngModel)]="ammt" id="d3" name="amnt" class="form-control mt-2 p-2" type="text" placeholder="Enter Amount">
             </div>
             <button (click)="withdraw()" class="btn btn-info mt-4 p-2" style="font-weight: bold;">WITHDRAW</button>
 
@@ -39,6 +39,7 @@
     </div>
 </div>
 
-<div class="" style="margin-left: 700px;background-color: black;width:200px;height: 100px;">
-    <a class="p-4" style="" href="">VIEW TRANSACTION</a>
+<div class="container  text-center  col-sm-6" style="background-color: black;width:250px;height: 100px;">
+    <a class="p-2" style="text-decoration: none;" routerLink="/transaction">VIEW TRANSACTION DETAILS</a>
 </div>
+ 
