@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DataService } from '../services/data.service';
 
@@ -10,36 +10,44 @@ import { DataService } from '../services/data.service';
 })
 export class RegisterComponent {
 
-  acnno:any
-  psww:any
-  uname:any
 
-  constructor(private ds:DataService,private router:Router,private fb:FormBuilder){}
+
+  constructor(private ds: DataService, private router: Router, private fb: FormBuilder) { }
 
   //model for register form
 
   registerForm = this.fb.group({
-    acnno:[''],
-    psww:[''],
-    uname:['']
+    acnno: ['', [Validators.required, Validators.pattern('[0-9]+')]],
+    psww: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9]+')]],
+    uname: ['', [Validators.required, Validators.pattern('[a-zA-Z]+')]]
   })
 
   //injection is succesful.Now we r going to call the "register method" in the dataservice.ts to here
 
-  register(){
-    var acnno = this.acnno
-    var psww = this.psww
-    var uname = this.uname
+  register() {
+    var acnno = this.registerForm.value.acnno
+    var psww = this.registerForm.value.psww
+    var uname = this.registerForm.value.uname
 
-    const result = this.ds.register(acnno,uname,psww)
-    if (result) {
-      alert("registered")
-      this.router.navigateByUrl("")
+    //WE ARE CHECKING VALIDATION
+
+    if (this.registerForm.valid) {
+      const result = this.ds.register(acnno, uname, psww)
+      if (result) {
+        alert("registered")
+        this.router.navigateByUrl("")
+      }
+      else {
+        alert("user already present")
+      }
+
     }
-    else{
-      alert("user already present")
+    else {
+      alert("invalid form")
     }
-    
+
+
+
   }
 
 }
