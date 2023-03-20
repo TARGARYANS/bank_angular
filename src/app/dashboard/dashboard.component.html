@@ -1,45 +1,105 @@
 <h1 class=" p-2 ms-2" style="color: rgb(246, 220, 53);text-align: center;">WELCOME {{user}}</h1>
-<div class="row">
-    <div class="col-6 p-3">
 
-        <h2 class="mt-3" style="color: palevioletred;font-weight: bold;text-align: center;">DEPOSIT FORM</h2>
-        <form class="mt-4 p-3 w-50 container text-center"
-            style="background-color: rgba(124, 64, 202, 0.44);border-radius: 20px;" action="">
-            <div class="p-2 mt-2">
-                <input [(ngModel)]="acno" id="c1" name="acn" class="form-control mt-2 p-2" type="text" placeholder="account number">
-            </div>
-            <div class="p-2 mt-2">
-                <input [(ngModel)]="psw" id="c2" name="pps" class="form-control mt-2 p-2" type="password" placeholder="Enter Password">
-            </div>
-            <div class="p-2 mt-2">
-                <input [(ngModel)]="ant" id="c3" name="amt" class="form-control mt-2 p-2" type="text" placeholder="Enter Amount">
-            </div>
-            <button (click)="deposit()" class="btn btn-warning mt-4 p-2" style="font-weight: bold;">DEPOSIT</button>
-
-        </form>
-
-    </div>
-    <div class="col-6 p-3">
-        <h2 class="mt-3" style="color: rgb(239, 14, 21);font-weight: bold;text-align: center;">WITHDRAW FORM</h2>
-        <form class="mt-4 p-3 w-50 container text-center"
-            style="background-color: rgba(124, 64, 202, 0.44);border-radius: 20px;" action="">
-            <div class="p-2 mt-2">
-                <input [(ngModel)]="acnu" id="d1" name="acnb" class="form-control mt-2 p-2" type="text" placeholder="account number">
-            </div>
-            <div class="p-2 mt-2">
-                <input [(ngModel)]="psd" id="d2" name="pwd" class="form-control mt-2 p-2" type="password" placeholder="Enter Password">
-            </div>
-            <div class="p-2 mt-2">
-                <input [(ngModel)]="ammt" id="d3" name="amnt" class="form-control mt-2 p-2" type="text" placeholder="Enter Amount">
-            </div>
-            <button (click)="withdraw()" class="btn btn-info mt-4 p-2" style="font-weight: bold;">WITHDRAW</button>
-
-        </form>
-
-    </div>
+<div class="text-light mt-1 ms-3">
+    <p>{{xdate | date:'short'}}</p>
 </div>
 
-<div class="container  text-center  col-sm-6" style="background-color: black;width:250px;height: 100px;">
-    <a class="p-2" style="text-decoration: none;" routerLink="/transaction">VIEW TRANSACTION DETAILS</a>
-</div>
- 
+<div class="text-end">
+    <button (click)="logout()" type="submit" class="btn btn-warning  p-2">
+        logout
+    </button>
+
+    <div class="text-end">
+        <button (click)="deleteAcc()" type="submit" class="btn btn-danger  mt-2 p-2">
+            Delete
+        </button>
+
+        <app-delete [item]="acno"></app-delete>
+
+    </div>
+
+    <div  [ngClass]="acno?'s1':''" class="row">
+        <div class="col-6 p-3">
+
+            <h2 class="mt-3" style="color: palevioletred;font-weight: bold;text-align: center;">DEPOSIT FORM</h2>
+
+            <form [formGroup]="depositForm" class="mt-4 p-3 w-50 container text-center"
+                style="background-color: rgba(124, 64, 202, 0.44);border-radius: 20px;" action="">
+                <div class="p-2 mt-2">
+                    <input formControlName="acno" id="c1" name="acn" class="form-control mt-2 p-2" type="text"
+                        placeholder="account number">
+                </div>
+
+                <div *ngIf="this.depositForm.get('acno')?.errors && this.depositForm.get('acno')?.touched"
+                    class="text-start ms-2">
+                    <p style="color: rgb(27, 209, 149);font-weight: bold;">Use only numbers</p>
+                </div>
+
+                <div class="p-2 mt-2">
+                    <input formControlName="psw" id="c2" name="pps" class="form-control mt-2 p-2" type="password"
+                        placeholder="Enter Password">
+                </div>
+
+                <div *ngIf="this.depositForm.get('psw')?.errors && this.depositForm.get('psw')?.touched"
+                    class="text-start ms-2">
+                    <p style="color: rgb(27, 209, 149);font-weight: bold;">Include both characters & numbers</p>
+                </div>
+
+                <div class="p-2 mt-2">
+                    <input formControlName="ant" id="c3" name="amt" class="form-control mt-2 p-2" type="text"
+                        placeholder="Enter Amount">
+                </div>
+
+                <div *ngIf="this.depositForm.get('acno')?.errors && this.depositForm.get('acno')?.touched"
+                    class="text-start ms-2">
+                    <p style="color: rgb(27, 209, 149);font-weight: bold;">Use only numbers</p>
+                </div>
+                <button (click)="deposit()" class="btn btn-warning mt-4 p-2" style="font-weight: bold;">DEPOSIT</button>
+
+            </form>
+
+        </div>
+        <div class="col-6 p-3">
+            <h2 class="mt-3" style="color: rgb(239, 14, 21);font-weight: bold;text-align: center;">WITHDRAW FORM</h2>
+            <form [formGroup]="withdrawForm" class="mt-4 p-3 w-50 container text-center"
+                style="background-color: rgba(124, 64, 202, 0.44);border-radius: 20px;" action="">
+
+                <div class="p-2 mt-2">
+                    <input formControlName="acnu" id="d1" name="acnb" class="form-control mt-2 p-2" type="text"
+                        placeholder="account number">
+                </div>
+
+                <div *ngIf="this.withdrawForm.get('acnu')?.errors && this.withdrawForm.get('acnu')?.touched"
+                    class="text-start ms-2">
+                    <p style="color: rgb(27, 209, 149);font-weight: bold;">Use only numbers</p>
+                </div>
+
+                <div class="p-2 mt-2">
+                    <input formControlName="psd" id="d2" name="pwd" class="form-control mt-2 p-2" type="password"
+                        placeholder="Enter Password">
+                </div>
+
+                <div *ngIf="this.withdrawForm.get('psd')?.errors && this.withdrawForm.get('psd')?.touched"
+                    class="text-start ms-2">
+                    <p style="color: rgb(27, 209, 149);font-weight: bold;">Include both characters & numbers</p>
+                </div>
+
+                <div class="p-2 mt-2">
+                    <input formControlName="ammt" id="d3" name="amnt" class="form-control mt-2 p-2" type="text"
+                        placeholder="Enter Amount">
+                </div>
+
+                <div *ngIf="this.withdrawForm.get('ammt')?.errors && this.withdrawForm.get('ammt')?.touched"
+                    class="text-start ms-2">
+                    <p style="color: rgb(27, 209, 149);font-weight: bold;">Use only numbers</p>
+                </div>
+                <button (click)="withdraw()" class="btn btn-info mt-4 p-2" style="font-weight: bold;">WITHDRAW</button>
+
+            </form>
+
+        </div>
+    </div>
+
+    <div [ngClass]="acno?'s1':''" class="container  text-center  col-sm-6" style="background-color: black;width:250px;height: 100px;">
+        <a class="p-2" style="text-decoration: none;" routerLink="/transaction">VIEW TRANSACTION DETAILS</a>
+    </div>

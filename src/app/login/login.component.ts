@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DataService } from '../services/data.service';
 
@@ -15,8 +16,8 @@ export class LoginComponent {
 
   //variable declaration can be done by either
   // acno=""   or  acno:any
-  acno:any
-  psw:any
+  // acno:any
+  // psw:any
 
   // userDetails:any ={                                                    //This  is a database
   //   1000:{username:"Thomas",acno:1000,password:"ab12",balance:0},
@@ -24,7 +25,13 @@ export class LoginComponent {
   //   1002:{username:"Sasha",acno:1002,password:"ab14",balance:0},
   //   1003:{username:"Luke",acno:1003,password:"ab15",balance:0}
   // }
-  constructor(private router:Router,private ds:DataService){}
+  constructor(private router:Router,private ds:DataService,private fb:FormBuilder){}
+  
+  //MODEL CREATION
+  loginForm = this.fb.group({
+    acno:['',[Validators.required,Validators.pattern('[0-9]+')]],
+    psw:['',[Validators.required,Validators.pattern('[a-zA-Z0-9]+')]]
+  })
 
 
   //let us make a method
@@ -88,9 +95,11 @@ export class LoginComponent {
   //we created login method in data services.Now we can call it here
 
   login(){
-    var acno = this.acno
-    var psw = this.psw
-    const result=this.ds.login(acno,psw)
+    var acno = this.loginForm.value.acno
+    var psw = this.loginForm.value.psw
+
+    if (this.loginForm.valid) {
+      const result=this.ds.login(acno,psw)
     if (result){
       alert("login success")
       this.router.navigateByUrl("dashboard")
@@ -98,6 +107,11 @@ export class LoginComponent {
     else{
       alert("Incorrect acno or password")
     }
+    }
+    else{
+      alert("login invalid")
+    }
+    
   }
 
 

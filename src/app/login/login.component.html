@@ -5,13 +5,24 @@
 
 
 <h1 class="text-center mt-3" style="color: rgb(230, 244, 71);font-weight: bold;">Sign In</h1>
-<form class="mt-4 p-3 w-50 container text-center" style="background-color: rgba(124, 64, 202, 0.44);border-radius: 20px;" action="">
+
+<form [formGroup]="loginForm" class="mt-4 p-3 w-50 container text-center" style="background-color: rgba(124, 64, 202, 0.44);border-radius: 20px;" action="">
   <div class="p-2 mt-2">
-    <input [(ngModel)]="acno"  id="a1" name="uname" class="form-control mt-2 p-2" type="text" [placeholder]="data1">
+    <input formControlName="acno"  id="a1" name="uname" class="form-control mt-2 p-2" type="text" [placeholder]="data1">
   </div>
+
+  <div *ngIf="this.loginForm.get('acno')?.errors && this.loginForm.get('acno')?.touched" class="text-start ms-2">
+    <p style="color: rgb(27, 209, 149);font-weight: bold;">Use only numbers</p>
+  </div>
+
   <div class="p-2 mt-2">
-    <input  [(ngModel)]="psw"   id="a2" name="password" class="form-control mt-2 p-2" type="password" placeholder="Enter Password">
+    <input  formControlName="psw"   id="a2" name="password" class="form-control mt-2 p-2" type="password" placeholder="Enter Password">
   </div>
+
+  <div *ngIf="this.loginForm.get('psw')?.errors && this.loginForm.get('psw')?.touched" class="text-start ms-2">
+    <p style="color: rgb(228, 80, 64);font-weight: bold;">Include characters and numbers</p>
+  </div>
+
   <button (click)="login()" class="btn btn-danger mt-4 p-2">Login</button>
   <p class="mt=2" style="color: aqua;font-weight: bold;"
   >Dont have an account? <a style="color: rgb(148, 235, 94);" href="register">Create account</a> </p>

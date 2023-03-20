@@ -7,16 +7,47 @@ export class DataService {
 
   currentuser:any
   currentAcno:any
+  userDetails:any
 
 
-  userDetails:any ={                                                    //Just paste the required data into the service
-    1000:{username:"Thomas",acno:1000,password:"ab12",balance:0,transaction:[]},
-    1001:{username:"Dante",acno:1001,password:"ab13",balance:0,transaction:[]},
-    1002:{username:"Sasha",acno:1002,password:"ab14",balance:0,transaction:[]},
-    1003:{username:"Luke",acno:1003,password:"ab15",balance:0,transaction:[]}
+  // userDetails:any ={                                                    //Just paste the required data into the service
+  //   1000:{username:"Thomas",acno:1000,password:"ab12",balance:0,transaction:[]},
+  //   1001:{username:"Dante",acno:1001,password:"ab13",balance:0,transaction:[]},
+  //   1002:{username:"Sasha",acno:1002,password:"ab14",balance:0,transaction:[]},
+  //   1003:{username:"Luke",acno:1003,password:"ab15",balance:0,transaction:[]}
+  // }
+
+  constructor() {
+    this.getDetails()            //SINCE CONSTRUCTOR WORKS BEFORE ALL OTHER METHODS,WE R CALLING "getDetails() method" inside the constructor.
+   }                             // So before each method code inside constructor works and data will be accesed from the localstorage as per the code.
+
+  //WE ARE CREATING A METHOD TO SAVE ITEMS IN LOCALSTORAGE
+
+  saveDetails(){
+    if (this.userDetails) {
+      localStorage.setItem("userDetails",JSON.stringify(this.userDetails))       //To convert into string we r using JSON
+    }
+    if (this.currentuser) {
+      localStorage.setItem("curentuser",this.currentuser)
+    }
+    if (this.currentAcno) {
+      localStorage.setItem("currentAcno",JSON.stringify(this.currentAcno))
+    }
   }
 
-  constructor() { }
+  // NOW WE ARE ACCESSING THE DATA INSIDE THE LOCALSTORAGE
+
+  getDetails(){
+    if (localStorage.getItem("userDetails")){
+      this.userDetails=JSON.parse(localStorage.getItem("userDetails") || "")
+    }
+    if (localStorage.getItem("currentuser")) {
+      this.currentuser=localStorage.getItem("currentuser")
+    }
+    if (localStorage.getItem("currentAcno")){
+      this.currentAcno=JSON.parse(localStorage.getItem("currentAcno") || "")
+    }
+  }
 
   //we r creating a method here for "register"
 
@@ -27,8 +58,9 @@ export class DataService {
     }
     else{
       userDetails[acno]={username:unname,acno,password:pssw,balance:0,transaction:[]}
-      console.log(userDetails);
-      
+      // console.log(userDetails);
+      //we r calling localstorage method
+      this.saveDetails()
       return true
     }
   }
@@ -43,6 +75,8 @@ export class DataService {
         this.currentuser = userDetails[acno]["username"]
         //we r storing acno of user whose login is succesful
         this.currentAcno=acno
+
+        this.saveDetails()
         return true
       }
       else{
@@ -72,6 +106,8 @@ export class DataService {
             Amount:amount            // Already deposited sum is stored in the variable "amount",so it is given directly as the value of sec key "Amount" 
           }
         )   
+
+        this.saveDetails()
 
         return userDetails[acno]["balance"]
       }
@@ -106,6 +142,8 @@ export class DataService {
           )  
 
           // console.log(userDetails);
+
+          this.saveDetails()
           
 
           return userDetails[acnu]["balance"]
